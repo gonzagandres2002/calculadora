@@ -9,7 +9,7 @@ export default function alu() {
               <span>00000000</span>
             </div>
             <div className="border border-gray-300 p-2 flex justify-between">
-              <span>R. Entrada</span>
+              <span>Restrepo. Entrada</span>
               <span>00000000</span>
             </div>
           </div>
