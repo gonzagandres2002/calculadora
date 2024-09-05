@@ -1,4 +1,4 @@
-export default function alu() {
+export default function Alu() {
   return (
 
         <div className="p-4 border-blue-500 bg-blue-300/45 bg- rounded-md  w-96 h-52">

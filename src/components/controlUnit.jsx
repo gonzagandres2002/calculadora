@@ -1,4 +1,4 @@
-export default function controlUnit() {
+export default function ControlUnit() {
   return (
     <div className="p-4 bg-yellow-200 border-yellow-300 rounded-md w-96 h-52">
       <h2 className="font-bold mb-2">Unidad de control</h2>

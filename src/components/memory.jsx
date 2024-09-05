@@ -1,5 +1,5 @@
 
-export default function memory() {
+export default function Memory() {
   const memoryData = [
     { dir: '0000', content: '00000100' },
     { dir: '0001', content: '00000101' },
