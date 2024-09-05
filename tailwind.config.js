@@ -7,8 +7,15 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
+      width:{
+        '380':'380px',
+        '400':'400px'
       },
+      height: {
+        '200':'200px',
+        '260':'260px'
+
+      }
     },
   },
   plugins: [],
