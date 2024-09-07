@@ -11,7 +11,7 @@ export default function RegistroEntrada() {
                 style={{ top: "50%", background: "blue" }} // adjust the vertical position
             />
             <Handle
-                type="target" // incoming connection
+                type="target"// incoming connection
                 position="left" // position of the handle on the node
             />
         </div>

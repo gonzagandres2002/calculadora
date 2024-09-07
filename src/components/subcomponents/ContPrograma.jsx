@@ -6,13 +6,13 @@ export default function ContPrograma() {
             <span className="font-bold">Cont. Programa</span>
             <span>0000</span>
             <Handle
-                type="source" // outgoing connection
-                position="right" // position of the handle on the node (top, bottom, left, right)
-                style={{ top: "50%", background: "blue" }} // adjust the vertical position
+                type="source" 
+                position="right" 
+                style={{ top: "50%", background: "blue" }} 
             />
             <Handle
-                type="target" // incoming connection
-                position="left" // position of the handle on the node
+                type="target" 
+                position="left" 
             />
         </div>
     );
