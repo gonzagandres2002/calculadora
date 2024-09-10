@@ -21,7 +21,15 @@ import RegistroDatos from '@/components/subcomponents/RegistroDatos';
 import TablaMemoria from '@/components/subcomponents/TablaMemoria';
 
 //edges
-import Edge11 from '@/components/edges/Edge11';
+import Edge1 from '@/components/edges/Edge1';
+import Edge2 from '@/components/edges/Edge2';
+import Edge3 from '@/components/edges/Edge3';
+import Edge4 from '@/components/edges/Edge4';
+import Edge5 from '@/components/edges/Edge5';
+import Edge6 from '@/components/edges/Edge6';
+import Edge7 from '@/components/edges/Edge7';
+import Edge8 from '@/components/edges/Edge8';
+import Edge9 from '@/components/edges/Edge9';
 
 const Home = () => {
   const onNodesChange = useCallback(() => {}, []);
@@ -29,10 +37,19 @@ const Home = () => {
   const onConnect = useCallback(() => {}, []);
 
   const edgeTypes = {
-    custom: Edge11,  // Register the custom edge type
+    custom1: Edge1,  // Register the custom edge type
+    custom2: Edge2,  
+    custom3: Edge3,
+    custom4: Edge4,
+    custom5: Edge5,
+    custom6: Edge6,
+    custom7: Edge7,
+    custom8: Edge8, 
+    custom9: Edge9,
   };
   
   const initialNodes = [
+    /*control unit*/
     {
       id: 'control-unit',
       type: 'input',
@@ -58,62 +75,62 @@ const Home = () => {
       position: { x: -100, y: 150 },
       style: { width: 220, height: 110 }
     },
+    /*Unidad aritmetico logica*/
     {
       id: 'alu',
       data: { label: <Alu /> },
-      position: { x: 550, y: 90 },
+      position: { x: 650, y: 90 },
       style: { width: 250, height: 180 }
     },
     {
       id: 'acumulador',
       data: { label: <Acumulador /> },
-      position: { x: 450, y: 160 }, 
+      position: { x: 550, y: 160 }, 
       style: { width: 200, height: 60 }
     },
     {
       id: 'registro-entrada',
       data: { label: <RegistroEntrada /> },
-      position: { x: 700, y: 160 },  
+      position: { x: 800, y: 160 },  
       style: { width: 200, height: 60 }
     },
+    /*Memoria*/
     {
       id: 'memory',
       data: { label: <Memory /> },
-      position: { x: 200, y: 350 },
+      position: { x: 300, y: 450 },
       style: { width: 400, height: 300 }
     },
     {
       id: 'registro-direcciones',
       data: { label: <RegistroDirecciones /> },
-      position: { x: 140, y: 400 },
+      position: { x: 240, y: 500 },
       style: { width: 220, height: 60 }
     },
     {
       id: 'registro-datos',
       data: { label: <RegistroDatos /> },
-      position: { x: 420, y: 400 },
+      position: { x: 520, y: 500 },
       style: { width: 220, height: 60 }
     },
     {
       id: 'tabla-memoria',
       data: { label: <TablaMemoria /> },
-      position: { x: 290, y: 480 },
+      position: { x: 390, y: 580 },
       style: { width: 220, height: 300 }
     }
   ];
   
   const initialEdges = [
-    /*{ id: 'edge1', source: 'contador-programa', target: 'registro-direcciones', type: 'step',  style: { stroke: '#000'} },
-    { id: 'edge2', source: 'contador-programa', target: 'contador-programa', type: 'step' },
-    { id: 'edge3', source: 'registro-direcciones', target: 'tabla-memoria', type: 'step' }, 
-    { id: 'edge4', source: 'tabla-memoria', target: 'registro-datos', type: 'step' },  
-    { id: 'edge5', source: 'registro-datos', target: 'registro-instrucciones', type: 'smoothstep' },
-    { id: 'edge6', source: 'registro-instrucciones', target: 'decodificador', type: 'smoothstep' },
-    { id: 'edge7', source: 'registro-instrucciones', target: 'registro-direcciones', type: 'smoothstep' },
-    { id: 'edge8', source: 'registro-direcciones', target: 'tabla-memoria', type: 'step' }, 
-    { id: 'edge9', source: 'tabla-memoria', target: 'registro-datos', type: 'step' },  
-    { id: 'edge10', source: 'registro-datos', target: 'registro-entrada', type: 'smoothstep' },*/
-    { id: 'edge11', source: 'registro-entrada', target: 'acumulador', type: 'custom' },
+    { id: 'edge1', source: 'contador-programa', target: 'registro-direcciones', type: 'custom1',  style: { stroke: '#000'} },
+    { id: 'edge2', source: 'contador-programa', target: 'contador-programa', type: 'custom2' },
+    { id: 'edge3', source: 'registro-direcciones', target: 'tabla-memoria', type: 'custom3' }, 
+    { id: 'edge4', source: 'tabla-memoria', target: 'registro-datos', type: 'custom4' },  
+    { id: 'edge5', source: 'registro-datos', target: 'registro-instrucciones', type: 'custom5' },
+    { id: 'edge6', source: 'registro-instrucciones', target: 'decodificador', type: 'custom6' },
+    { id: 'edge7', source: 'registro-datos', target: 'registro-entrada', type: 'custom7' },
+    { id: 'edge8', source: 'registro-entrada', target: 'acumulador', type: 'custom8' },
+    { id: 'edge9', source: 'acumulador', target: 'registro-datos', type: 'custom9' },
   ];
 
   return (

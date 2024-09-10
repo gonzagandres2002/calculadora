@@ -1,4 +1,4 @@
-const Edge11 = ({
+const Edge8 = ({
   id,
   sourceX,
   sourceY,
@@ -37,4 +37,4 @@ const Edge11 = ({
   );
 };
 
-export default Edge11;
+export default Edge8;

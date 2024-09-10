@@ -1,4 +1,4 @@
-const Edge1 = ({
+const Edge4 = ({
     id,
     sourceX,
     sourceY,
@@ -8,19 +8,16 @@ const Edge1 = ({
     markerEnd,
   }) => {
   
-    const midX0 = sourceX + 30;
-    const midY0 = sourceY ; 
+    const midX0 = sourceX;
+    const midY0 = sourceY + 27; 
   
-    const midX1 = sourceX + 30;
-    const midY1 = sourceY + 200;
+    const midX1 = midX0 + 270;
+    const midY1 = midY0;
   
-    const midX2 = midX1 - 200;
-    const midY2 = midY1;
+    const midX2 = midX1;
+    const midY2 = midY1 - 380;
   
-    const midX3 = midX2;
-    const midY3 = midY2 + 160;
-  
-    const edgePath = `M${sourceX},${sourceY} L${midX0},${midY0} L${midX1},${midY1} L${midX2},${midY2} L${midX3},${midY3} L${targetX},${targetY+35}`;
+    const edgePath = `M${sourceX},${sourceY} L${midX0},${midY0} L${midX1},${midY1} L${midX2},${midY2} L${targetX},${targetY+35}`;
   
   
     return (
@@ -36,4 +33,4 @@ const Edge1 = ({
     );
   };
   
-  export default Edge1;
+  export default Edge4;

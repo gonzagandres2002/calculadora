@@ -28,11 +28,6 @@ export default function TablaMemoria() {
                     <span>{item.content}</span>
                 </div>
             ))}
-            <Handle
-                type="source"
-                position="left"
-                style={{ top: "50%", background: "blue" }}
-            />
             <Handle type="target" position="left" />
         </div>
     );

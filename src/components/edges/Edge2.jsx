@@ -1,4 +1,4 @@
-const Edge1 = ({
+const Edge2 = ({
     id,
     sourceX,
     sourceY,
@@ -12,14 +12,15 @@ const Edge1 = ({
     const midY0 = sourceY ; 
   
     const midX1 = sourceX + 30;
-    const midY1 = sourceY + 200;
+    const midY1 = sourceY - 50;
   
-    const midX2 = midX1 - 200;
+    const midX2 = midX1 - 50;
     const midY2 = midY1;
   
     const midX3 = midX2;
-    const midY3 = midY2 + 160;
+    const midY3 = midY2 + 50;
   
+    // Create the path with a bend: down 40 units, left 40 units, then go to target
     const edgePath = `M${sourceX},${sourceY} L${midX0},${midY0} L${midX1},${midY1} L${midX2},${midY2} L${midX3},${midY3} L${targetX},${targetY+35}`;
   
   
@@ -36,4 +37,4 @@ const Edge1 = ({
     );
   };
   
-  export default Edge1;
+  export default Edge2;
