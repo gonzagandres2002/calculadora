@@ -30,6 +30,7 @@ import Edge6 from "@/components/edges/Edge6";
 import Edge7 from "@/components/edges/Edge7";
 import Edge8 from "@/components/edges/Edge8";
 import Edge9 from "@/components/edges/Edge9";
+import Edge10 from "@/components/edges/Edge10";
 
 const Home = () => {
     const onNodesChange = useCallback(() => {}, []);
@@ -46,6 +47,7 @@ const Home = () => {
         custom7: Edge7,
         custom8: Edge8,
         custom9: Edge9,
+        custom10: Edge10,
     };
 
     const initialNodes = [
@@ -176,56 +178,102 @@ const Home = () => {
             target: "registro-datos",
             type: "custom9",
         },
+        {
+            id: "edge10",
+            source: "registro-instrucciones",
+            target: "registro-direcciones",
+            type: "custom10",
+        },
     ];
 
+    const updateOrder = [
+        "edge1",
+        "edge2",
+        "edge3",
+        "edge4",
+        "edge5",
+        "edge6",
+        "edge10",
+        "edge3",
+        "edge4",
+        "edge7",
+        "edge8",
+        "edge1",
+        "edge2",
+        "edge3",
+        "edge4",
+        "edge5",
+        "edge6",
+        "edge10",
+        "edge3",
+        "edge4",
+        "edge7",
+        "edge8",
+        "edge1",
+        "edge2",
+        "edge3",
+        "edge4",
+        "edge5",
+        "edge6",
+        "edge10",
+        "edge3",
+        "edge9",
+        "edge4",
+        "edge1",
+        "edge2",
+        "edge3",
+        "edge4",
+        "edge5",
+        "edge6",
+    ]; // This controls the specific update sequence
+
     const [edges, setEdges] = useState(initialEdges);
-    const [currentIndex, setCurrentIndex] = useState(0); // Index to track which edge is currently active
+  const [currentIndex, setCurrentIndex] = useState(0);  // Track which edge in updateOrder to change
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);  // Track when the button should stop
 
-    const changeEdgeWidth = () => {
-        setEdges((prevEdges) => {
-            // Find the index of the edge to be updated
-            const newEdges = prevEdges.map((edge, index) => {
-                if (index === currentIndex) {
-                    return {
-                        ...edge,
-                        style: { ...edge.style, strokeWidth: 3 },
-                    };
-                } else if (
-                    index ===
-                    (currentIndex - 1 + prevEdges.length) % prevEdges.length
-                ) {
-                    return {
-                        ...edge,
-                        style: { ...edge.style, strokeWidth: 1 },
-                    };
-                }
-                return edge;
-            });
+  const changeEdgeWidth = () => {
+    if (currentIndex < updateOrder.length) {
+      const edgeToUpdate = updateOrder[currentIndex];  // Get the specific edge to update
 
-            return newEdges;
+      setEdges((prevEdges) => {
+        const newEdges = prevEdges.map((edge) => {
+          if (edge.id === edgeToUpdate) {
+            return { ...edge, style: { ...edge.style, strokeWidth: 3 } }; // Increment width
+          }
+          return { ...edge, style: { ...edge.style, strokeWidth: 1 } }; // Reset others to default
         });
+        return newEdges;
+      });
 
-        // Update the currentIndex to the next edge
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % initialEdges.length);
-    };
+      // Move to the next edge in the updateOrder array
+      setCurrentIndex((prevIndex) => prevIndex + 1);
 
-    return (
-        <div className="min-h-screen flex flex-col items-center justify-center p-4">
-            <div className="w-full p-4 flex flex-col gap-4 h-screen">
-                <ReactFlow
-                    nodes={initialNodes}
-                    edges={edges}
-                    edgeTypes={edgeTypes}
-                    fitView
-                >
-                    <MiniMap />
-                    <Controls />
-                    <Background />
-                </ReactFlow>
-                <button onClick={changeEdgeWidth}>Change Edge Width</button>
-            </div>
-        </div>
-    );
+      // If the current index reaches the end of the array, disable the button
+      if (currentIndex + 1 === updateOrder.length) {
+        setIsButtonDisabled(true);
+      }
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center p-4">
+      <div className="w-full p-4 flex flex-col gap-4 h-screen">
+        <ReactFlow
+          nodes={initialNodes}
+          edges={edges}
+          edgeTypes={edgeTypes}
+          fitView
+        >
+          <MiniMap />
+          <Controls />
+          <Background />
+        </ReactFlow>
+        <button onClick={changeEdgeWidth} disabled={isButtonDisabled}>
+          {isButtonDisabled ? 'All Edges Updated' : 'Change Edge Width'}
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default Home;
