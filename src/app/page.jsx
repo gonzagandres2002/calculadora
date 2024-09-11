@@ -106,7 +106,7 @@ const updateOrder = [
     "edge10",
     "edge3",
     "edge4",
-    "edge7",  /*10*/
+    "edge7" /*10*/,
     "edge8",
     "edge1",
     "edge2",
@@ -116,7 +116,7 @@ const updateOrder = [
     "edge6",
     "edge10",
     "edge3",
-    "edge4", /*20*/
+    "edge4" /*20*/,
     "edge7",
     "edge8",
     "edge1",
@@ -126,7 +126,7 @@ const updateOrder = [
     "edge5",
     "edge6",
     "edge10",
-    "edge3", /*30*/
+    "edge3" /*30*/,
     "edge9",
     "edge4",
     "edge1",
@@ -155,28 +155,30 @@ const memoryData = [
     { dir: "0001", content: "00000101" },
     { dir: "0010", content: "01100111" },
     { dir: "0011", content: "01110000" },
-    { dir: "0100", content: "00001001" },
-    { dir: "0101", content: "00000100" },
+    { dir: "0100", content: "00000101" },
+    { dir: "0101", content: "00001011" },
     { dir: "0110", content: "00000000" },
     { dir: "0111", content: "00000000" },
 ];
 
 const Home = () => {
-    
     const [edges, setEdges] = useState(initialEdges);
     const [currentIndex, setCurrentIndex] = useState(0); // Track which edge in updateOrder to change
     const [isButtonDisabled, setIsButtonDisabled] = useState(false); // Track when the button should stop
     const [clickCount, setClickCount] = useState(1);
 
     // Component values
-    const [contProgramaValue, setContProgramaValue] = useState("0000"); 
-    const [registroDireccionesValue, setRegistroDireccionesValue] = useState("0000"); 
+    const [contProgramaValue, setContProgramaValue] = useState("0000");
+    const [registroDireccionesValue, setRegistroDireccionesValue] =
+        useState("0000");
     const [registroDatosValue, setRegistroDatosValue] = useState("0000");
-    const [registroInstruccionesValue, setRegistroInstruccionesValue] = useState("0000");
+    const [registroInstruccionesValue, setRegistroInstruccionesValue] =
+        useState("0000");
     const [decodificadorValue, setDecodificadorValue] = useState("");
     const [registroEntradaValue, setRegistroEntradaValue] = useState("0000");
     const [acumuladorValue, setAcumuladorValue] = useState("0000");
-    
+    const [memoryDataValue, setMemoryDataValue] = useState(memoryData);
+
     //Cambio de las conexiones
 
     const changeEdgeWidth = useCallback(() => {
@@ -209,13 +211,17 @@ const Home = () => {
         }
     }, [currentIndex, updateOrder]);
 
-
-    //Logica de la calculadora 
+    //Logica de la calculadora
 
     const changeCalcState = useCallback(() => {
-
         // Contador de programa
-        if (clickCount === 2 || clickCount === 13 || clickCount === 24 || clickCount === 34 || clickCount === 39) {
+        if (
+            clickCount === 2 ||
+            clickCount === 13 ||
+            clickCount === 24 ||
+            clickCount === 34 ||
+            clickCount === 39
+        ) {
             setContProgramaValue((prevValue) => {
                 const newValue = (parseInt(prevValue, 2) + 1)
                     .toString(2)
@@ -223,34 +229,48 @@ const Home = () => {
                 return newValue;
             });
         }
-        
+
         // Registro de direcciones
-        if (clickCount === 7 || clickCount === 12 || clickCount === 18 || clickCount === 23 || clickCount === 29 || clickCount === 33) {
-            if(clickCount === 12 || clickCount === 23 || clickCount === 33){
+        if (
+            clickCount === 7 ||
+            clickCount === 12 ||
+            clickCount === 18 ||
+            clickCount === 23 ||
+            clickCount === 29 ||
+            clickCount === 33
+        ) {
+            if (clickCount === 12 || clickCount === 23 || clickCount === 33) {
                 setRegistroDireccionesValue(() => {
                     const newValue = contProgramaValue;
                     return newValue;
                 });
-            }else{
+            } else {
                 setRegistroDireccionesValue(() => {
                     const newValue = registroInstruccionesValue.slice(4, 8);
                     return newValue;
                 });
             }
-            
         }
 
         // Registro de datos
-        if (clickCount === 4 || clickCount === 9 || clickCount === 15 || clickCount === 20 || clickCount === 26 || clickCount === 32 || clickCount === 36 || clickCount === 31) {
-            if(clickCount === 31){
+        if (
+            clickCount === 4 ||
+            clickCount === 9 ||
+            clickCount === 15 ||
+            clickCount === 20 ||
+            clickCount === 26 ||
+            clickCount === 36 ||
+            clickCount === 31
+        ) {
+            if (clickCount === 31) {
                 setRegistroDatosValue(() => {
-                    /*const newValue = acumuladorValue;*/
+                    const newValue = acumuladorValue;
                     return newValue;
                 });
-            }else{
+            } else {
                 setRegistroDatosValue(() => {
-                    for(let i = 0; i < memoryData.length; i++){
-                        if(memoryData[i].dir === registroDireccionesValue){
+                    for (let i = 0; i < memoryData.length; i++) {
+                        if (memoryData[i].dir === registroDireccionesValue) {
                             const newValue = memoryData[i].content;
                             return newValue;
                         }
@@ -260,25 +280,46 @@ const Home = () => {
         }
 
         // Registro de instrucciones
-        if(clickCount === 5 || clickCount === 10 || clickCount === 16 || clickCount === 21 || clickCount === 27 || clickCount === 37){
+        if (
+            clickCount === 5 ||
+            clickCount === 10 ||
+            clickCount === 16 ||
+            clickCount === 21 ||
+            clickCount === 27 ||
+            clickCount === 37
+        ) {
             setRegistroInstruccionesValue(() => {
                 const newValue = registroDatosValue;
                 return newValue;
             });
         }
-        
+
         // Decodificador
-        if(clickCount === 6 || clickCount === 17 || clickCount === 28 || clickCount === 38){
+        if (
+            clickCount === 6 ||
+            clickCount === 17 ||
+            clickCount === 28 ||
+            clickCount === 38
+        ) {
             setDecodificadorValue(() => {
                 if (registroDatosValue.slice(0, 4) === "0000") {
                     const newValue = "+";
+                    return newValue;
+                } else if (registroDatosValue.slice(0, 4) === "0110") {
+                    const newValue = "M";
+                    return newValue;
+                } else if (registroDatosValue.slice(0, 4) === "0010") {
+                    const newValue = "*";
+                    return newValue;
+                } else if (registroDatosValue.slice(0, 4) === "0111") {
+                    const newValue = "...";
                     return newValue;
                 }
             });
         }
 
         //Registro de entrada
-        if(clickCount === 10 || clickCount === 21){
+        if (clickCount === 10 || clickCount === 21) {
             setRegistroEntradaValue(() => {
                 const newValue = registroDatosValue;
                 return newValue;
@@ -286,15 +327,27 @@ const Home = () => {
         }
 
         //Acumulador
-        if(clickCount === 11 || clickCount === 22){
+        if (clickCount === 11 || clickCount === 22) {
             setAcumuladorValue((prevValue) => {
-                const newValue = (parseInt(prevValue, 2) + parseInt(registroEntradaValue, 2)).toString(2);
+                const newValue = (
+                    parseInt(prevValue, 2) + parseInt(registroEntradaValue, 2)
+                ).toString(2).padStart(8, "0");
                 return newValue;
             });
         }
 
-
-
+        //Tabla de memoria
+        if (clickCount === 32) {
+            setMemoryDataValue((prevValue) => {
+                const newValue = prevValue.map((item) => {
+                    if (item.dir === registroDireccionesValue) {
+                        return { ...item, content: registroDatosValue.padStart(8, "0") };
+                    }
+                    return item;
+                });
+                return newValue;
+            });
+        }
 
     }, [clickCount]); // Add clickCount as a dependency
 
@@ -321,13 +374,17 @@ const Home = () => {
         },
         {
             id: "registro-instrucciones",
-            data: { label: <RegistroInstrucciones value={registroInstruccionesValue}/> },
+            data: {
+                label: (
+                    <RegistroInstrucciones value={registroInstruccionesValue} />
+                ),
+            },
             position: { x: 140, y: 200 },
             style: { width: 220, height: 60 },
         },
         {
             id: "decodificador",
-            data: { label: <Decodificador value={decodificadorValue}/> },
+            data: { label: <Decodificador value={decodificadorValue} /> },
             position: { x: -100, y: 150 },
             style: { width: 220, height: 110 },
         },
@@ -340,13 +397,13 @@ const Home = () => {
         },
         {
             id: "acumulador",
-            data: { label: <Acumulador value={acumuladorValue}/> },
+            data: { label: <Acumulador value={acumuladorValue} /> },
             position: { x: 550, y: 160 },
             style: { width: 200, height: 60 },
         },
         {
             id: "registro-entrada",
-            data: { label: <RegistroEntrada value={registroEntradaValue}/> },
+            data: { label: <RegistroEntrada value={registroEntradaValue} /> },
             position: { x: 800, y: 160 },
             style: { width: 200, height: 60 },
         },
@@ -359,19 +416,21 @@ const Home = () => {
         },
         {
             id: "registro-direcciones",
-            data: { label: <RegistroDirecciones value={registroDireccionesValue}/> },
+            data: {
+                label: <RegistroDirecciones value={registroDireccionesValue} />,
+            },
             position: { x: 240, y: 500 },
             style: { width: 220, height: 60 },
         },
         {
             id: "registro-datos",
-            data: { label: <RegistroDatos value={registroDatosValue}/> },
+            data: { label: <RegistroDatos value={registroDatosValue} /> },
             position: { x: 520, y: 500 },
             style: { width: 220, height: 60 },
         },
         {
             id: "tabla-memoria",
-            data: { label: <TablaMemoria value={ memoryData } /> },
+            data: { label: <TablaMemoria value={memoryDataValue} /> },
             position: { x: 390, y: 580 },
             style: { width: 220, height: 300 },
         },
