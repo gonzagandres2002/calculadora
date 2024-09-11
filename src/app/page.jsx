@@ -7,9 +7,9 @@ import "reactflow/dist/style.css";
 import "./globals.css";
 
 // Main components
-import ControlUnit from "../components/ControlUnit";
+import ControlUnit from "@/components/ControlUnit";
 import Alu from "@/components/Alu";
-import Memory from "../components/Memory";
+import Memory from "@/components/Memory";
 
 // Subcomponents
 import RegistroEntrada from "@/components/subcomponents/RegistroEntrada";
@@ -32,6 +32,7 @@ import Edge7 from "@/components/edges/Edge7";
 import Edge8 from "@/components/edges/Edge8";
 import Edge9 from "@/components/edges/Edge9";
 import Edge10 from "@/components/edges/Edge10";
+import Memory from "@/components/Memory";
 
 const initialEdges = [
     {
