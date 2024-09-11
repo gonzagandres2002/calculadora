@@ -32,7 +32,6 @@ import Edge7 from "@/components/edges/Edge7";
 import Edge8 from "@/components/edges/Edge8";
 import Edge9 from "@/components/edges/Edge9";
 import Edge10 from "@/components/edges/Edge10";
-import Memory from "@/components/Memory";
 
 const initialEdges = [
     {
