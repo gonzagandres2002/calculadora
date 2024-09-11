@@ -127,6 +127,17 @@ const updateOrder = [
     "edge6",
     "edge10",
     "edge3" /*30*/,
+    "edge4",
+    "edge7",
+    "edge8",
+    "edge1",
+    "edge2",
+    "edge3",
+    "edge4",
+    "edge5",
+    "edge6", //M
+    "edge10",
+    "edge3",
     "edge9",
     "edge4",
     "edge1",
@@ -151,13 +162,13 @@ const edgeTypes = {
 };
 
 const memoryData = [
-    { dir: "0000", content: "00000100" },
-    { dir: "0001", content: "00000101" },
-    { dir: "0010", content: "01100111" },
-    { dir: "0011", content: "01110000" },
+    { dir: "0000", content: "00000100" }, //Suma
+    { dir: "0001", content: "00000101" }, 
+    { dir: "0010", content: "00100110" }, //Producto
+    { dir: "0011", content: "01100111" },
     { dir: "0100", content: "00000101" },
-    { dir: "0101", content: "00001011" },
-    { dir: "0110", content: "00000000" },
+    { dir: "0101", content: "00001010" },
+    { dir: "0110", content: "00010000" },
     { dir: "0111", content: "00000000" },
 ];
 
@@ -190,7 +201,7 @@ const Home = () => {
                     if (edge.id === edgeToUpdate) {
                         return {
                             ...edge,
-                            style: { ...edge.style, strokeWidth: 3 },
+                            style: { ...edge.style, strokeWidth: 4 },
                         }; // Increment width
                     }
                     return {
@@ -219,8 +230,8 @@ const Home = () => {
             clickCount === 2 ||
             clickCount === 13 ||
             clickCount === 24 ||
-            clickCount === 34 ||
-            clickCount === 39
+            clickCount === 35 ||
+            clickCount === 45
         ) {
             setContProgramaValue((prevValue) => {
                 const newValue = (parseInt(prevValue, 2) + 1)
@@ -237,9 +248,11 @@ const Home = () => {
             clickCount === 18 ||
             clickCount === 23 ||
             clickCount === 29 ||
-            clickCount === 33
+            clickCount === 34 ||
+            clickCount === 40 ||
+            clickCount === 44
         ) {
-            if (clickCount === 12 || clickCount === 23 || clickCount === 33) {
+            if (clickCount === 12 || clickCount === 23 || clickCount === 34 || clickCount === 44) {
                 setRegistroDireccionesValue(() => {
                     const newValue = contProgramaValue;
                     return newValue;
@@ -259,10 +272,12 @@ const Home = () => {
             clickCount === 15 ||
             clickCount === 20 ||
             clickCount === 26 ||
-            clickCount === 36 ||
-            clickCount === 31
+            clickCount === 31 ||
+            clickCount === 37 ||
+            clickCount === 42 ||
+            clickCount === 47 
         ) {
-            if (clickCount === 31) {
+            if (clickCount === 38 || clickCount === 42) {
                 setRegistroDatosValue(() => {
                     const newValue = acumuladorValue;
                     return newValue;
@@ -286,7 +301,8 @@ const Home = () => {
             clickCount === 16 ||
             clickCount === 21 ||
             clickCount === 27 ||
-            clickCount === 37
+            clickCount === 38 ||
+            clickCount === 48
         ) {
             setRegistroInstruccionesValue(() => {
                 const newValue = registroDatosValue;
@@ -299,27 +315,30 @@ const Home = () => {
             clickCount === 6 ||
             clickCount === 17 ||
             clickCount === 28 ||
-            clickCount === 38
+            clickCount === 39 ||
+            clickCount === 45 ||
+            clickCount === 49
         ) {
             setDecodificadorValue(() => {
-                if (registroDatosValue.slice(0, 4) === "0000") {
-                    const newValue = "+";
+                if (clickCount === 49) {
+                    const newValue = "...";
                     return newValue;
-                } else if (registroDatosValue.slice(0, 4) === "0110") {
-                    const newValue = "M";
+                }else if (registroDatosValue.slice(0, 4) === "0000") {
+                    const newValue = "+";
                     return newValue;
                 } else if (registroDatosValue.slice(0, 4) === "0010") {
                     const newValue = "*";
                     return newValue;
-                } else if (registroDatosValue.slice(0, 4) === "0111") {
-                    const newValue = "...";
+                } else if (registroDatosValue.slice(0, 4) === "0110") {
+                    const newValue = "M";
                     return newValue;
-                }
+                
+                } 
             });
         }
 
         //Registro de entrada
-        if (clickCount === 10 || clickCount === 21) {
+        if (clickCount === 10 || clickCount === 21 || clickCount === 32) {
             setRegistroEntradaValue(() => {
                 const newValue = registroDatosValue;
                 return newValue;
@@ -327,17 +346,26 @@ const Home = () => {
         }
 
         //Acumulador
-        if (clickCount === 11 || clickCount === 22) {
-            setAcumuladorValue((prevValue) => {
-                const newValue = (
-                    parseInt(prevValue, 2) + parseInt(registroEntradaValue, 2)
-                ).toString(2).padStart(8, "0");
-                return newValue;
-            });
+        if (clickCount === 11 || clickCount === 22 || clickCount === 33) {
+            if(decodificadorValue === "+"){
+                setAcumuladorValue((prevValue) => {
+                    const newValue = (
+                        parseInt(prevValue, 2) + parseInt(registroEntradaValue, 2)
+                    ).toString(2).padStart(8, "0");
+                    return newValue;
+                });
+            }else{
+                setAcumuladorValue((prevValue) => {
+                    const newValue = (
+                        parseInt(prevValue, 2) * parseInt(registroEntradaValue, 2)
+                    ).toString(2).padStart(8, "0");
+                    return newValue;
+                });
+            }
         }
 
         //Tabla de memoria
-        if (clickCount === 32) {
+        if (clickCount === 43) {
             setMemoryDataValue((prevValue) => {
                 const newValue = prevValue.map((item) => {
                     if (item.dir === registroDireccionesValue) {
@@ -351,6 +379,7 @@ const Home = () => {
 
     }, [clickCount]); // Add clickCount as a dependency
 
+    //Logica de avance
     const handleButtonClick = useCallback(() => {
         setClickCount((prevCount) => prevCount + 1);
         changeEdgeWidth();
@@ -439,11 +468,6 @@ const Home = () => {
     return (
         <div className="min-h-screen flex flex-col items-center justify-center p-4">
             <div className="w-full p-4 flex flex-col gap-4 h-screen">
-                <button onClick={handleButtonClick} disabled={isButtonDisabled}>
-                    {isButtonDisabled
-                        ? "All Edges Updated"
-                        : "Change Edge Width"}
-                </button>
                 <ReactFlowProvider>
                     <ReactFlow
                         nodes={initialNodes}
@@ -456,6 +480,11 @@ const Home = () => {
                         <Background />
                     </ReactFlow>
                 </ReactFlowProvider>
+                <button onClick={handleButtonClick} disabled={isButtonDisabled} className="border-2 border-blue-600 bg-blue-300 h-16 w-40 mx-auto mb-3 rounded-md font-semibold">
+                    {isButtonDisabled
+                        ? "Proceso completado"
+                        : "Siguiente"}
+                </button>
             </div>
         </div>
     );
