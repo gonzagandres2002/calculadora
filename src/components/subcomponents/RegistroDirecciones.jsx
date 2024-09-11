@@ -1,10 +1,10 @@
 import { Handle } from 'reactflow';
 
-export default function RegistroDirecciones() {
+export default function RegistroDirecciones({value}) {
     return (
         <div className="border-2 border-red-500 bg-red-300 p-2 flex justify-between">
             <span className="font-bold">R. Direcciones</span>
-            <span>0000</span>
+            <span>{value}</span>
             <Handle
                 type="source"
                 position="left"

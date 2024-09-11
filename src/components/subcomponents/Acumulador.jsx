@@ -1,11 +1,11 @@
 import { Handle } from "reactflow";
 
-const Acumulador = () => {
+const Acumulador = ({value}) => {
     return (
         <div className="border-2 border-blue-500 bg-blue-300 p-2 flex flex-col items-center">
             <div className="flex justify-between w-full">
                 <span className="font-bold">Acumulador</span>
-                <span>00000000</span>
+                <span>{value}</span>
             </div>
             <Handle
                 type="source" // outgoing connection
