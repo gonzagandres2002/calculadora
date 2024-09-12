@@ -106,17 +106,6 @@ const updateOrder = [
     "edge10",
     "edge3",
     "edge4",
-    "edge7" /*10*/,
-    "edge8",
-    "edge1",
-    "edge2",
-    "edge3",
-    "edge4",
-    "edge5",
-    "edge6",
-    "edge10",
-    "edge3",
-    "edge4" /*20*/,
     "edge7",
     "edge8",
     "edge1",
@@ -126,7 +115,18 @@ const updateOrder = [
     "edge5",
     "edge6",
     "edge10",
-    "edge3" /*30*/,
+    "edge3",
+    "edge4",
+    "edge7",
+    "edge8",
+    "edge1",
+    "edge2",
+    "edge3",
+    "edge4",
+    "edge5",
+    "edge6",
+    "edge10",
+    "edge3",
     "edge4",
     "edge7",
     "edge8",
@@ -146,7 +146,7 @@ const updateOrder = [
     "edge4",
     "edge5",
     "edge6",
-]; // This controls the specific update sequence
+]; 
 
 const edgeTypes = {
     custom1: Edge1,
@@ -174,8 +174,8 @@ const memoryData = [
 
 const Home = () => {
     const [edges, setEdges] = useState(initialEdges);
-    const [currentIndex, setCurrentIndex] = useState(0); // Track which edge in updateOrder to change
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false); // Track when the button should stop
+    const [currentIndex, setCurrentIndex] = useState(0); 
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false); 
     const [clickCount, setClickCount] = useState(1);
 
     // Component values
@@ -194,7 +194,7 @@ const Home = () => {
 
     const changeEdgeWidth = useCallback(() => {
         if (currentIndex < updateOrder.length) {
-            const edgeToUpdate = updateOrder[currentIndex]; // Get the specific edge to update
+            const edgeToUpdate = updateOrder[currentIndex]; // Obtiene la conexión a cambiar
 
             setEdges((prevEdges) => {
                 const newEdges = prevEdges.map((edge) => {
@@ -202,20 +202,18 @@ const Home = () => {
                         return {
                             ...edge,
                             style: { ...edge.style, strokeWidth: 4 },
-                        }; // Increment width
+                        }; // Incrementa el ancho de la conexión
                     }
                     return {
                         ...edge,
                         style: { ...edge.style, strokeWidth: 1 },
-                    }; // Reset others to default
+                    }; // Restablece el ancho de la conexión
                 });
                 return newEdges;
             });
-
-            // Move to the next edge in the updateOrder array
             setCurrentIndex((prevIndex) => prevIndex + 1);
 
-            // If the current index reaches the end of the array, disable the button
+            // Deshabilita el botón si se ha completado el proceso
             if (currentIndex + 1 === updateOrder.length) {
                 setIsButtonDisabled(true);
             }
@@ -377,13 +375,13 @@ const Home = () => {
             });
         }
 
-    }, [clickCount]); // Add clickCount as a dependency
+    }, [clickCount]); 
 
     //Logica de avance
     const handleButtonClick = useCallback(() => {
         setClickCount((prevCount) => prevCount + 1);
         changeEdgeWidth();
-        changeCalcState(); // Call to update the counter value
+        changeCalcState(); 
     }, [changeEdgeWidth, changeCalcState]);
 
     const initialNodes = [
@@ -466,8 +464,8 @@ const Home = () => {
     ];
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center p-4">
-            <div className="w-full p-4 flex flex-col gap-4 h-screen">
+        <div className="h-screen flex flex-col items-center justify-center p-4">
+            <div className="w-full p-4 flex flex-col gap-4 h-full">
                 <ReactFlowProvider>
                     <ReactFlow
                         nodes={initialNodes}
@@ -479,6 +477,7 @@ const Home = () => {
                         <Controls />
                         <Background />
                     </ReactFlow>
+                    
                 </ReactFlowProvider>
                 <button onClick={handleButtonClick} disabled={isButtonDisabled} className="border-2 border-blue-600 bg-blue-300 h-16 w-40 mx-auto mb-3 rounded-md font-semibold">
                     {isButtonDisabled
