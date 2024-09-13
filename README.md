@@ -4,6 +4,7 @@
 ## Description
 
 This project is a web-based simulation of a Von Neumann architecture machine, implemented using React, Next.js, and React Flow. It visualizes the connections between different components of the machine, such as the Control Unit, Arithmetic Logic Unit (ALU), Memory, and various registers, and allows for interactive data manipulation within the components.
+Link: https://vonneumman.netlify.app/
 
 ## Features
 
